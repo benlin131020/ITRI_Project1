@@ -8,10 +8,12 @@ def roi(img):
     #gaussianblur
     blur = cv2.GaussianBlur(sharpen,(5,5),0)
     #otsu threshold
-    ret2,th2 = cv2.threshold(blur,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
+    ret,thr = cv2.threshold(blur,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
+    cv2.imshow("otsu",thr)
     #closing
     kernel = np.ones((5,5),np.uint8)
-    closing = cv2.morphologyEx(th2, cv2.MORPH_CLOSE, kernel)
+    closing = cv2.morphologyEx(thr, cv2.MORPH_CLOSE, kernel)
+    cv2.imshow("closing",closing)
     #contuour
     image, contours, hierarchy = cv2.findContours(closing,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
     img=cv2.cvtColor(img,cv2.COLOR_GRAY2BGR)
