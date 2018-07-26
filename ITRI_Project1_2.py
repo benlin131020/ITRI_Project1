@@ -34,7 +34,7 @@ def filling_hole(im_in):
 def roi(img):
     #enhance
     enhance_img=enhance(img)
-    enhance_img=enhance(enhance_img)
+    #enhance_img=enhance(enhance_img)
     #otsu threshold
     ret,thr = cv2.threshold(enhance_img,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
     #closing
@@ -60,22 +60,10 @@ def roi(img):
     return roi
 
 #main
-img1=cv2.imread("37736735_2061362360549587_9024993033665380352_n.jpg",0)
-roi1=roi(img1)
-img1=cv2.cvtColor(img1,cv2.COLOR_GRAY2BGR)
-res1=np.hstack((img1,roi1))
-cv2.imshow("result1",res1)
-'''
 img2=cv2.imread("37770404_2061362363882920_3525037766163300352_n.jpg",0)
 roi2=roi(img2)
 img2=cv2.cvtColor(img2,cv2.COLOR_GRAY2BGR)
 res2=np.hstack((img2,roi2))
 cv2.imshow("result2",res2)
 
-img3=cv2.imread("37673579_2061362367216253_6417462665358082048_n.jpg",0)
-roi3=roi(img3)
-img3=cv2.cvtColor(img3,cv2.COLOR_GRAY2BGR)
-res3=np.hstack((img3,roi3))
-cv2.imshow("result3",res3)
-'''
 cv2.waitKey(0)
