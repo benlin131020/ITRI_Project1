@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 import cv2
 
 def sobel(img):
@@ -44,3 +45,35 @@ def filling_hole_br(img):
     # Combine the two images to get the foreground.
     filled_img = img | im_floodfill_inv
     return filled_img
+
+def features(roi,contours):
+    index=[]
+    centroid_x=[]
+    centroid_y=[]
+    area=[]
+    perimeter=[]
+    i=0
+    for cnt in contours:
+        #centroid
+        M=cv2.moments(cnt)
+        cx=int(M['m10']/M['m00'])
+        cy=int(M['m01']/M['m00'])
+        centroid_x=np.append(centroid_x,cx)
+        centroid_y=np.append(centroid_y,cy)
+        #area
+        area=np.append(area,cv2.contourArea(cnt))
+        #perimeter
+        perimeter=np.append(perimeter,cv2.arcLength(cnt,True))
+        #index
+        index=np.append(index,i)
+        cv2.putText(roi,str(i),(cx,cy),cv2.FONT_HERSHEY_SIMPLEX,1,(255,255,255),2,cv2.LINE_AA)
+        i+=1
+
+    df = pd.DataFrame({"Index":index,
+    "Centroid_X":centroid_x,
+    "Centroid_Y:":centroid_y,
+    "Area":area,
+    "Perimeter":perimeter
+    })
+
+    return df
