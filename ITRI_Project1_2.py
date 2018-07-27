@@ -8,6 +8,7 @@ def roi(img):
     cl1 = clahe.apply(img)
     #enhance
     enhance_img=ip.enhance(cl1)
+    #enhance_img=ip.enhance(enhance_img)
     #otsu threshold
     ret,thr = cv2.threshold(enhance_img,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
     #closing
@@ -32,7 +33,6 @@ def roi(img):
     cv2.imshow("opening",opening)
 
     return roi
-
 #main
 img2=cv2.imread("37770404_2061362363882920_3525037766163300352_n.jpg",0)
 roi2=roi(img2)
