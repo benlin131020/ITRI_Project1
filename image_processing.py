@@ -77,3 +77,20 @@ def features(roi,contours):
     })
 
     return df
+
+def coordinate(roi,contours):
+    df= pd.DataFrame()
+    i=0
+    for cnt in contours:
+        mask = np.zeros(roi.shape,np.uint8)
+        cv2.drawContours(mask,[cnt],0,255,-1)
+        pixelpoints = np.transpose(np.nonzero(mask))
+        y=np.reshape(pixelpoints[:,0],(len(pixelpoints[:,0]),1))
+        x=np.reshape(pixelpoints[:,1],(len(pixelpoints[:,1]),1))
+        index=np.full(x.shape,i)
+        pixelpoints=np.hstack((x,y,index))
+        df_points=pd.DataFrame(pixelpoints,columns=['x','y','i'])
+        df=df.append(df_points)
+        i+=1
+    print(df)
+    df.to_csv("coordinate.csv")

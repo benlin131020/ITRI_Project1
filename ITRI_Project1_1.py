@@ -23,6 +23,8 @@ def roi(img):
     #get features
     df=ip.features(roi,contours)
     print(df)
+    #get coordinate
+    ip.coordinate(roi,contours)
     #stacking images side-by-side
     opening=cv2.cvtColor(opening,cv2.COLOR_GRAY2BGR)
     roi=np.hstack((opening,roi))
