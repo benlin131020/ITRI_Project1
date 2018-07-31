@@ -52,6 +52,7 @@ def features(roi,contours):
     centroid_y=[]
     area=[]
     perimeter=[]
+    aspect_ratio=[]
     i=0
     for cnt in contours:
         #centroid
@@ -64,6 +65,9 @@ def features(roi,contours):
         area=np.append(area,cv2.contourArea(cnt))
         #perimeter
         perimeter=np.append(perimeter,cv2.arcLength(cnt,True))
+        #aspect ratio
+        x,y,w,h = cv2.boundingRect(cnt)
+        aspect_ratio=np.append(aspect_ratio,float(w)/h)
         #index
         index=np.append(index,i)
         cv2.putText(roi,str(i),(cx,cy),cv2.FONT_HERSHEY_SIMPLEX,1,(255,255,255),2,cv2.LINE_AA)
@@ -73,7 +77,8 @@ def features(roi,contours):
     "Centroid_X":centroid_x,
     "Centroid_Y:":centroid_y,
     "Area":area,
-    "Perimeter":perimeter
+    "Perimeter":perimeter,
+    "Aspect_Ratio":aspect_ratio
     })
 
     return df

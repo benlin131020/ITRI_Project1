@@ -20,11 +20,11 @@ def roi(img):
     image, contours, hierarchy = cv2.findContours(opening,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
     img=cv2.cvtColor(img,cv2.COLOR_GRAY2BGR)
     roi = cv2.drawContours(img, contours, -1, (0,0,255), 1)
-    #get features
+    #get features and draw
     df=ip.features(roi,contours)
     print(df)
     #get coordinate
-    ip.coordinate(roi,contours)
+    #ip.coordinate(roi,contours)
     #stacking images side-by-side
     opening=cv2.cvtColor(opening,cv2.COLOR_GRAY2BGR)
     roi=np.hstack((opening,roi))
