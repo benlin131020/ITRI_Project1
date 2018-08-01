@@ -45,5 +45,6 @@ roi_img1=roi(img1)
 img1=cv2.cvtColor(img1,cv2.COLOR_GRAY2BGR)
 res1=np.hstack((img1,roi_img1))
 cv2.imshow("result1",res1)
+cv2.imwrite("result.jpg",res1)
 
 cv2.waitKey(0)
