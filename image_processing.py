@@ -70,7 +70,7 @@ def features(roi,contours):
         aspect_ratio=np.append(aspect_ratio,float(w)/h)
         #index
         index=np.append(index,i)
-        cv2.putText(roi,str(i),(cx,cy),cv2.FONT_HERSHEY_SIMPLEX,1,(255,255,255),2,cv2.LINE_AA)
+        cv2.putText(roi,str(i),(cx,cy),cv2.FONT_HERSHEY_SIMPLEX,0.5,(255,255,255),1,cv2.LINE_AA)
         i+=1
 
     df = pd.DataFrame({"Index":index,
